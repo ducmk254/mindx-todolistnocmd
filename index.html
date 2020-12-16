@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Danh sách công việc lần làm</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="style.css" rel="stylesheet">
+        <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    </head>
+    <body >
+        <div id="root"></div>
+    </body>
+    <script type="text/babel">
+    
+        class List extends React.Component{
+            
+            constructor(props){
+                super(props);
+            }
+            
+            render() {
+                
+                let ds = this.props.todolists;
+                console.log(ds)
+                // let todoLists = ds.map((cv)=> cv.isComplete ? <li key={cv.id} className="todo-status"><span>{cv.title}</span><button>Delete</button></li> : <li key={cv.id}><span>{cv.title}</span><button>Delete</button></li>);
+                return (
+                    <div className="todo">
+                        <ul >
+                            {
+                                ds.map((cv)=>cv.isComplete ? <li key={cv.id} className="todo-status"><span>{cv.title}</span><button>Delete</button></li> : <li key={cv.id}><span>{cv.title}</span><button>Delete</button></li>)
+                            }   
+                        </ul>
+                    </div>
+                )
+            }
+        }
+ 
+        class InputTodo extends React.Component{
+            constructor(props){
+                super(props);
+                this.state = {
+                    value : ""
+                }
+                this.handleChangeInput = this.handleChangeInput.bind(this);
+                this.handleClick       = this.handleClick.bind(this);
+            }
+
+            handleChangeInput(e){
+                this.setState({value:e.target.value});
+            }
+            handleClick(e){
+                this.props.handleChangeAdd(e,this.state.value);
+                this.setState({value:""});
+            }
+            render(){
+                return(
+                    <form id="to-do">
+                        <input type="text" name="todo" placeholder="Nhập tiêu đề task" value={this.state.value} onChange={this.handleChangeInput}/>
+                        <button className="nut" onClick={this.handleClick}>Thêm</button>
+                    </form>
+                );
+            }
+        }
+
+        class TodoList extends React.Component{
+            
+            constructor(){
+                super();
+                this.state = {
+                    list: [
+                    {
+                        id: 1,
+                        title:"Gặp Thanh Thanh",
+                        isComplete: false
+                    },
+                    {
+                        id: 2,
+                        title:"Đi ăn cùng Thanh thanh",
+                        isComplete: false
+                    },{
+                        id: 3,
+                        title:"Đưa Thanh Thanh về.",
+                        isComplete: false
+                    },{
+                        id: 4,
+                        title:"Về nhà ngủ ngon.",
+                        isComplete: false
+                    }
+                ]
+                };
+                this.handleChange = this.handleChange.bind(this);
+            }
+            handleChange(e,value){
+                e.preventDefault();
+                let todo = this.state.list;
+                todo.push({
+                    id: 0,
+                    title: value,
+                    isComplete: false
+                });
+
+                this.setState({list: todo});
+            }
+            render(){
+                console.log(this.state.list)
+                return (
+                    <>
+                    <h1>Danh sách công việc:</h1>
+                    <InputTodo handleChangeAdd={this.handleChange}/>
+                    <List  todolists = {this.state.list}/>
+                    </>
+                );
+            }
+        }
+
+        ReactDOM.render(<TodoList />, document.getElementById("root"));
+    </script>
+</html>

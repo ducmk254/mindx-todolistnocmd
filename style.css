@@ -1,0 +1,81 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+#root {
+    margin: 0 auto;
+    width: 500px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+}
+.todo{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+
+    margin: 0px auto;
+    width: 100%;
+    height: auto;
+    min-width: 320px;
+}
+.todo li {
+    text-transform: capitalize;
+    margin: 10px 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 1px solid rgb(238, 233, 233);
+}
+.todo li span{
+    flex-grow: 9;
+    text-indent: 10px;
+}
+.todo li button{
+    padding: 5px 0;
+    flex-grow: 1;
+    min-width: 100px;
+    justify-content: flex-end;
+    color: red;
+    background-color: rgb(140, 240, 240);
+    border: 1px solid tomato;
+}
+.todo .todo-status span{
+    text-decoration: line-through;
+    color: blueviolet;
+    opacity: 0.4;
+}
+
+#to-do{
+    margin: 0px auto;
+    width: 100%;
+    min-width: 320px;
+    height: auto;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#to-do input{
+    flex-grow: 9;
+    padding: 5px 0px ;
+    text-indent: 10px;
+}
+#to-do button{
+    flex-grow: 1;
+    min-width: 100px;
+    padding: 5px;
+}
+h1{
+    padding: 10px 0px;
+    text-transform: uppercase;
+}
